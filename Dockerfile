@@ -36,7 +36,6 @@ RUN CONFIG="\
 		--with-http_xslt_module=dynamic \
 		--with-http_image_filter_module=dynamic \
 		--with-http_geoip_module=dynamic \
-		--with-http_perl_module=dynamic \
 		--with-threads \
 		--with-stream \
 		--with-stream_ssl_module \
@@ -45,7 +44,6 @@ RUN CONFIG="\
 		--with-mail_ssl_module \
 		--with-file-aio \
 		--with-http_v2_module \
-		--with-ipv6 \
 		--add-module=/usr/src/ngx_brotli \
                 --with-cc-opt=-Wno-error \
 	" \
@@ -64,7 +62,6 @@ RUN CONFIG="\
 		libxslt-dev \
 		gd-dev \
 		geoip-dev \
-		perl-dev \
 	&& apk add --no-cache --virtual .brotli-build-deps \
 		autoconf \
 		libtool \
@@ -95,7 +92,6 @@ RUN CONFIG="\
 	&& mv objs/ngx_http_xslt_filter_module.so objs/ngx_http_xslt_filter_module-debug.so \
 	&& mv objs/ngx_http_image_filter_module.so objs/ngx_http_image_filter_module-debug.so \
 	&& mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
-	&& mv objs/ngx_http_perl_module.so objs/ngx_http_perl_module-debug.so \
 	&& ./configure $CONFIG \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
 	&& make install \
